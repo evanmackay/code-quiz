@@ -4,12 +4,20 @@ const nextButton = document.getElementById('next-btn')
 const questionContainerElement = document.getElementById('question-container')
 const questionElement = document.getElementById('question')
 const answerButtonsElement = document.getElementById('answer-btns')
+const timeElement = document.getElementById('timer')
+const header = document.getElementById('header')
+const gameOverElement = document.getElementById('game-over')
+const initialsButtonElement = document.getElementById('submit-btn')
+const highScoresButtonElement = document.getElementById('high-scores')
+const initialsElement = document.getElementById('initials')
 // creating variables that will be undefined
 let shuffledQuestions, currentQuestionIndex
 // creating a score counter
-let countRightAnswers = 0
+let countRightAnswers =0
+// setting the amount of seconds the user has left to complet quiz
+let secondsLeft = 60
 
-// start button and next button
+// start button and next button event listeners
 startButton.addEventListener('click', startGame)
 nextButton.addEventListener('click', () => {
     currentQuestionIndex++
@@ -19,9 +27,12 @@ nextButton.addEventListener('click', () => {
 // function that starts the game and selects which questions will be asked at random
 function startGame() {
     startButton.classList.add('hide')
+    header.classList.add('hide')
     shuffledQuestions = questions.sort(() => Math.random() - .5)
     currentQuestionIndex = 0
     questionContainerElement.classList.remove('hide')
+    timeElement.classList.remove('hide')
+    startTimer()
     setNextQuestion()
     countRightAnswers = 0
 }
@@ -30,7 +41,7 @@ function setNextQuestion () {
     resetState()
     showQuestion(shuffledQuestions[currentQuestionIndex])
 }
-// adds questions and answers to the application
+// shows questions and answers in the quiz instead of text from HTML
 function showQuestion(question) {
     questionElement.innerText = question.question
     question.answers.forEach(answer => {
@@ -44,7 +55,7 @@ function showQuestion(question) {
         answerButtonsElement.appendChild(button)
     })
 }
-// resets the state of the game once the next button or restart is pressed
+// resets the state of the game once the next is pressed
 function resetState () {
     clearStatusClass(document.body)
     nextButton.classList.add('hide')
@@ -53,7 +64,7 @@ function resetState () {
         
     }
 }
-// function to tell the app whether or not the app should continue to the next question or not. Also keeps the score count
+// function to tell the app whether or not the app should continue to the next question or not. Also keeps the score count and subtracts time if the users answer choice is wrong
 function selectAnswer(event) {
     const selectedButton = event.target
     const correct = selectedButton.dataset.correct
@@ -64,13 +75,14 @@ function selectAnswer(event) {
     if (shuffledQuestions.length > currentQuestionIndex + 1) {
         nextButton.classList.remove('hide')
     } else {
-        startButton.innerText = 'Restart'
-        startButton.classList.remove('hide')
+        gameOver()
     }
     if (selectedButton.dataset = correct) {
         countRightAnswers++
+    } else {
+        secondsLeft = secondsLeft-10
     }
-    document.getElementById('right-answers').innerHTML = countRightAnswers
+    document.getElementById('right-answers').innerHTML = 'Score: ' +countRightAnswers + ' out of 5'
 }
 // function to display the color in the background that corresponds to the right or wrong answer
 function setStatusClass(element, correct) {
@@ -86,6 +98,26 @@ function clearStatusClass(element) {
     element.classList.remove('correct')
     element.classList.remove('wrong')
 
+}
+// timer that will start when the quiz starts and ends when time runs out
+function startTimer() {
+    let timerInterval = setInterval(function() {
+        secondsLeft--;
+        timeElement.textContent = "You have " + secondsLeft + " seconds left!";
+
+        if (secondsLeft <= 0) {
+            clearInterval(timerInterval)
+            gameOver()
+        }
+    }, 1000)
+}
+// function that shows the game over section of the HTML. Users can enter their intials to save their score and view their high scores.
+function gameOver () {
+
+    gameOverElement.classList.remove('hide')
+    questionContainerElement.classList.add('hide')
+    timeElement.classList.add('hide')
+    resetState()
 }
 // group of objects that defines the questions and answers
 const questions= [{
@@ -129,6 +161,8 @@ const questions= [{
     {text: '.textContent', correct: true},
     {text: '.addText', correct: false}]
 }]
+
+
 
 
 

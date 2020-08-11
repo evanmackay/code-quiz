@@ -8,6 +8,7 @@
 </head>
 <body>
     <div class="container">
+        <h1 style="text-align: center; font-size: 3rem;" id="header" class="header">The Code Quiz!</h1>
         <span id="right-answers"></span>
         <div id="question-container" class="hide">
             <div id="question">Question</div>
@@ -21,6 +22,17 @@
         <div class="controls">
             <button id="start-btn" class="start-btn btn">Start</button>
             <button id="next-btn" class="next-btn btn hide">Next</button>
+        </div>
+        <div id="timer" class="timer hide"></div>
+        <div id="score-board" class="score-board hide"></div>
+        <div id="game-over" class="game-over hide">
+            <h1 style="font-size: 3rem; text-align: center;">Game Over!</h1>
+            <form action="">
+                <label for="initials">Enter your initials to save your high score!</label>
+                <input id="initials" type="text">
+                <input id="submit-btn" class="btn" type="submit">
+                <button id="high-scores" class="btn">View Your High Scores!</button>
+            </form>
         </div>
 
     </div>
