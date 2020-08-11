@@ -1,10 +1,14 @@
+// creating variables based on the ID's set in the HTML
 const startButton = document.getElementById('start-btn')
 const nextButton = document.getElementById('next-btn')
 const questionContainerElement = document.getElementById('question-container')
 const questionElement = document.getElementById('question')
 const answerButtonsElement = document.getElementById('answer-btns')
-
+// creating variables that will be undefined
 let shuffledQuestions, currentQuestionIndex
+// creating a score counter
+let countRightAnswers = 0
+
 
 startButton.addEventListener('click', startGame)
 nextButton.addEventListener('click', () => {
@@ -19,6 +23,7 @@ function startGame() {
     currentQuestionIndex = 0
     questionContainerElement.classList.remove('hide')
     setNextQuestion()
+    countRightAnswers = 0
 }
 
 function setNextQuestion () {
@@ -41,6 +46,7 @@ function showQuestion(question) {
 }
 
 function resetState () {
+    clearStatusClass(document.body)
     nextButton.classList.add('hide')
     while (answerButtonsElement.firstChild) {
         answerButtonsElement.removeChild(answerButtonsElement.firstChild)
@@ -55,7 +61,16 @@ function selectAnswer(event) {
     Array.from(answerButtonsElement.children).forEach(button => {
         setStatusClass(button, button.dataset.correct)
     })
-    nextButton.classList.remove('hide')
+    if (shuffledQuestions.length > currentQuestionIndex + 1) {
+        nextButton.classList.remove('hide')
+    } else {
+        startButton.innerText = 'Restart'
+        startButton.classList.remove('hide')
+    }
+    if (selectedButton.dataset = correct) {
+        countRightAnswers++
+    }
+    document.getElementById('right-answers').innerHTML = countRightAnswers
 }
 
 function setStatusClass(element, correct) {

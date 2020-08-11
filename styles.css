@@ -82,3 +82,7 @@ body.wrong {
 .hide {
     display: none;
 }
+
+.disable{
+    pointer-events: none;
+}
