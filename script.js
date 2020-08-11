@@ -9,14 +9,14 @@ let shuffledQuestions, currentQuestionIndex
 // creating a score counter
 let countRightAnswers = 0
 
-
+// start button and next button
 startButton.addEventListener('click', startGame)
 nextButton.addEventListener('click', () => {
     currentQuestionIndex++
     setNextQuestion()
 })
 
-
+// function that starts the game and selects which questions will be asked at random
 function startGame() {
     startButton.classList.add('hide')
     shuffledQuestions = questions.sort(() => Math.random() - .5)
@@ -25,12 +25,12 @@ function startGame() {
     setNextQuestion()
     countRightAnswers = 0
 }
-
+// sets the next question once the 'next' button is pressed
 function setNextQuestion () {
     resetState()
     showQuestion(shuffledQuestions[currentQuestionIndex])
 }
-
+// adds questions and answers to the application
 function showQuestion(question) {
     questionElement.innerText = question.question
     question.answers.forEach(answer => {
@@ -44,7 +44,7 @@ function showQuestion(question) {
         answerButtonsElement.appendChild(button)
     })
 }
-
+// resets the state of the game once the next button or restart is pressed
 function resetState () {
     clearStatusClass(document.body)
     nextButton.classList.add('hide')
@@ -53,7 +53,7 @@ function resetState () {
         
     }
 }
-
+// function to tell the app whether or not the app should continue to the next question or not. Also keeps the score count
 function selectAnswer(event) {
     const selectedButton = event.target
     const correct = selectedButton.dataset.correct
@@ -72,7 +72,7 @@ function selectAnswer(event) {
     }
     document.getElementById('right-answers').innerHTML = countRightAnswers
 }
-
+// function to display the color in the background that corresponds to the right or wrong answer
 function setStatusClass(element, correct) {
     clearStatusClass(element)
     if (correct) {
@@ -81,13 +81,13 @@ function setStatusClass(element, correct) {
         element.classList.add('wrong')
     }
 }
-
+// clears the status that is set by selecting a right or wrong answer
 function clearStatusClass(element) {
     element.classList.remove('correct')
     element.classList.remove('wrong')
 
 }
-
+// group of objects that defines the questions and answers
 const questions= [{
     question: 'What is an array?',
     answers: [
@@ -129,5 +129,8 @@ const questions= [{
     {text: '.textContent', correct: true},
     {text: '.addText', correct: false}]
 }]
+
+
+
 
 
