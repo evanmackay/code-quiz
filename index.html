@@ -4,12 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Code Quiz!</title>
+    <!--Link to external CSS-->
     <link rel="stylesheet" href="./assets/styles.css">
 </head>
 <body>
+    <!--Container for styling elements-->
     <div class="container">
         <h1 style="text-align: center; font-size: 3rem;" id="header" class="header">The Code Quiz!</h1>
+        <!--Score is kept here-->
         <span id="right-answers"></span>
+        <!--Container for questions that will be hidden on the first screen-->
         <div id="question-container" class="hide">
             <div id="question">Question</div>
             <div id="answer-btns" class="btn-grid">
@@ -19,18 +23,22 @@
                 <button class="btn">Answer 4</button>
             </div>
         </div>
+        <!--Controls containing start and next buttons-->
         <div class="controls">
             <button id="start-btn" class="start-btn btn">Start</button>
             <button id="next-btn" class="next-btn btn hide">Next</button>
         </div>
+        <!--timer kept here-->
         <div id="timer" class="timer hide"></div>
         <div id="score-board" class="score-board hide"></div>
+        <!--Game over screen with button to save high scores-->
         <div id="game-over" class="game-over hide">
             <h1 style="font-size: 3rem; text-align: center;">Game Over!</h1>
             <button id="high-scores" class="btn">Save High Score!</button>
         </div>
 
     </div>
+    <!--Link to external JavaScipt file-->
     <script src="./assets/script.js"></script>
 </body>
 </html>
