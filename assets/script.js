@@ -7,9 +7,7 @@ const answerButtonsElement = document.getElementById('answer-btns')
 const timeElement = document.getElementById('timer')
 const header = document.getElementById('header')
 const gameOverElement = document.getElementById('game-over')
-const initialsButtonElement = document.getElementById('submit-btn')
-const highScoresButtonElement = document.getElementById('high-scores')
-const initialsElement = document.getElementById('initials')
+const highScoresButton = document.getElementById('high-scores')
 // creating variables that will be undefined
 let shuffledQuestions, currentQuestionIndex
 // creating a score counter
@@ -23,6 +21,8 @@ nextButton.addEventListener('click', () => {
     currentQuestionIndex++
     setNextQuestion()
 })
+highScoresButton.addEventListener('click', setHighScore)
+
 
 // function that starts the game and selects which questions will be asked at random
 function startGame() {
@@ -119,6 +119,13 @@ function gameOver () {
     timeElement.classList.add('hide')
     resetState()
 }
+
+function setHighScore() {
+    let highScoreData = prompt('Enter your intials to save your high score to your local storage!')
+    localStorage.setItem(highScoreData, countRightAnswers)
+}
+
+
 // group of objects that defines the questions and answers
 const questions= [{
     question: 'What is an array?',
