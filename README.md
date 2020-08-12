@@ -17,3 +17,5 @@ Once the quiz has begun, the user has 60 seconds to answer the five questions pr
 ## The Game Over Screen
 ![enter image description here](https://github.com/evanmackay/code-quiz/blob/master/assets/Screen%20Shot%202020-08-12%20at%203.35.04%20PM.png?raw=true)
 Once all questions have been answered, or time has run out, the page will show the Game Over screen. Here the user will be able to submit their score by clicking on the "Save High Score!" button. This button activates a prompt for the user to input their initials. The score is then saved to the Local Storage on the users browser.
+
+This site was created using HTML, CSS, and JavaScript
